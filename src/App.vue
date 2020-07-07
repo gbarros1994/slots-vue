@@ -1,28 +1,34 @@
 <template>
   <div id="app" class="container">
-    <h1>VueJs</h1>
+    
+    <h1>Forma padrão</h1>
+    <PostsLista :posts="posts"/>
 
-    <Post>
-      <h2 slot="cabecalho">Components no Vue</h2>
-
-      <p class="h3">Components são uma peça do Vue</p>
-      <span>...</span>
-
-      <small slot="rodape">por Gerson Barros</small>
-
-      <template slot="botao">
-        Detalhes
+    <h1>Slot com scopo</h1>
+    <PostsLista :posts="posts">
+      <template slot-scope="slotProps">
+        <h2>{{ slotProps.meuPost.titulo }}</h2>
+        <p>{{ slotProps.meuPost.conteudo }}</p>
+        <small>{{ slotProps.meuPost.autor }}</small>
       </template>
-    </Post>
+    </PostsLista>
 
   </div>
 </template>
 
 <script>
-import Post from './components/Post.vue'
+import PostsLista from './components/PostsLista.vue'
 export default {
   components: {
-    Post
-  }
+    PostsLista
+  },
+  data() {
+    return {
+      posts: [
+        { id: 1, titulo: 'Components no Vue', conteudo: 'Componetens são legais', autor: 'Gerson'},
+        { id: 2, titulo: 'Components no Vue', conteudo: 'Componetens são legais', autor: 'Carlos'}
+      ]
+    }
+  },
 }
 </script>
