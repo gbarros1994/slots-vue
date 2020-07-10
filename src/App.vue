@@ -14,11 +14,13 @@
 
     <p> {{ componetSelecionado }}</p>
 
-    <component :is="componetSelecionado"
-    v-bind="propsAtuais"></component>
-
-    <Home/>
-    <Sobre/>
+  <!--MANTEM MEU COMPONENT VIVO, INCLUDE DIZ O QUE QUERO MANTER EM CASH-->
+  <keep-alive include="Sobre" exclude="Home" max>
+    <component
+      :is="componetSelecionado"
+      v-bind="propsAtuais">
+    </component>
+  </keep-alive>
     <!-- <PostsLista :posts="posts">
       <template slot-scope="{ meuPost }">
         <h2>{{ meuPost.titulo }}</h2>
