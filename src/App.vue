@@ -12,9 +12,15 @@
     <button @click="componetSelecionado = 'PostsLista'">Posts</button>
     <button @click="componetSelecionado = 'Sobre'">Sobre</button>
 
+    <button @click="componetSelecionado = 'Assincrono'">Assincrono</button>
+
     <p> {{ componetSelecionado }}</p>
 
-  <!--MANTEM MEU COMPONENT VIVO, INCLUDE DIZ O QUE QUERO MANTER EM CASH-->
+  <!--MANTEM MEU
+   COMPONENT VIVO, 
+   INCLUDE DIZ O QUE QUERO MANTER EM CASH
+   exclude nao mantem em cash
+   max excluid o que foi acessado por ultimo-->
   <keep-alive include="Sobre" exclude="Home" max>
     <component
       :is="componetSelecionado"
@@ -39,6 +45,13 @@ import Sobre from './components/Sobre.vue'
 
 export default {
   components: {
+    Assincrono: () => ({
+      component: import('./components/Assincrono.vue'),
+      loading: { template: '<p>Carregando...</p>'},
+      error: { template: '<h1>erro</h1>'},
+      delay: 200,
+      timeout: 3000
+    }),
     Home,
     PostsLista,
     Sobre
